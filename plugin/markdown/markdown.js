@@ -170,6 +170,7 @@
 		( wasHorizontal ? sectionStack : sectionStack[sectionStack.length-1] ).push( markdown.substring( lastIndex ) );
 
 		var markdownSections = '';
+        var markedSectionParam =  options.markedBaseUrl ? ' marked-base-url="' + options.markedBaseUrl + '"' : '';
 
 		// flatten the hierarchical stack, and insert <section data-markdown> tags
 		for( var i = 0, len = sectionStack.length; i < len; i++ ) {
@@ -178,13 +179,13 @@
 				markdownSections += '<section '+ options.attributes +'>';
 
 				sectionStack[i].forEach( function( child ) {
-					markdownSections += '<section data-markdown>' + createMarkdownSlide( child, options ) + '</section>';
+					markdownSections += '<section' + markedSectionParam + ' data-markdown>' + createMarkdownSlide( child, options ) + '</section>';
 				} );
 
 				markdownSections += '</section>';
 			}
 			else {
-				markdownSections += '<section '+ options.attributes +' data-markdown>' + createMarkdownSlide( sectionStack[i], options ) + '</section>';
+				markdownSections += '<section '+ options.attributes + markedSectionParam +' data-markdown>' + createMarkdownSlide( sectionStack[i], options ) + '</section>';
 			}
 		}
 
@@ -198,6 +199,7 @@
 	 * handles loading of external markdown.
 	 */
 	function processSlides() {
+	    var LAST_ELEMENT_OF_URL = /[^\/]+$/
 
 		var sections = document.querySelectorAll( '[data-markdown]'),
 			section;
@@ -227,7 +229,8 @@
 								separator: section.getAttribute( 'data-separator' ),
 								verticalSeparator: section.getAttribute( 'data-separator-vertical' ),
 								notesSeparator: section.getAttribute( 'data-separator-notes' ),
-								attributes: getForwardedAttributes( section )
+								attributes: getForwardedAttributes( section ),
+								markedBaseUrl: (url ? url.replace(LAST_ELEMENT_OF_URL, '') : null)
 							});
 
 						}
@@ -355,8 +358,9 @@
 
 				var notes = section.querySelector( 'aside.notes' );
 				var markdown = getMarkdownFromSlide( section );
+                var markedOptions = { baseUrl: section.getAttribute("marked-base-url") };
 
-				section.innerHTML = marked( markdown );
+				section.innerHTML = marked( markdown, markedOptions );
 				addAttributes( 	section, section, null, section.getAttribute( 'data-element-attributes' ) ||
 								section.parentNode.getAttribute( 'data-element-attributes' ) ||
 								DEFAULT_ELEMENT_ATTRIBUTES_SEPARATOR,
