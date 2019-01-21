@@ -170,7 +170,11 @@
 		( wasHorizontal ? sectionStack : sectionStack[sectionStack.length-1] ).push( markdown.substring( lastIndex ) );
 
 		var markdownSections = '';
-        var markedSectionParam =  options.markedBaseUrl ? ' marked-base-url="' + options.markedBaseUrl + '"' : '';
+		var markedSectionParam = '';
+		if( Reveal.getConfig().enableRelativePathsInExternalMarkdown
+		    && options.markedBaseUrl ) {
+            markedSectionParam = ' marked-base-url="' + options.markedBaseUrl + '"';
+		}
 
 		// flatten the hierarchical stack, and insert <section data-markdown> tags
 		for( var i = 0, len = sectionStack.length; i < len; i++ ) {
