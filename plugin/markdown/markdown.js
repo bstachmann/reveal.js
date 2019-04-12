@@ -112,6 +112,8 @@
 			content = notesMatch[0] + '<aside class="notes">' + marked(notesMatch[1].trim()) + '</aside>';
 		}
 
+		content = content + "<p>MÜLLERTRÜLLER"+ options.originalMarkdownUrl + "</p>";
+
 		// prevent script end tags in the content from interfering
 		// with parsing
 		content = content.replace( /<\/script>/g, SCRIPT_END_PLACEHOLDER );
@@ -230,7 +232,8 @@
 								verticalSeparator: section.getAttribute( 'data-separator-vertical' ),
 								notesSeparator: section.getAttribute( 'data-separator-notes' ),
 								attributes: getForwardedAttributes( section ),
-								markedBaseUrl: (url ? url.replace(LAST_ELEMENT_OF_URL, '') : null)
+								markedBaseUrl: (url ? url.replace(LAST_ELEMENT_OF_URL, '') : null),
+								originalMarkdownUrl: url,
 							});
 
 						}
