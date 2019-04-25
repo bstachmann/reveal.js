@@ -113,7 +113,7 @@
 		}
 
         var editorBaseUrl = "https://gitlab.com/bjoern.stachmann/git-workshop/edit/advanced-git-en/";
-		content = content + "<p/><a href="+options.originalMarkdownUrl+"  target=\"_blank\"><font size=\"4\">View</font></a><font size=\"4\">/</font><a href="+editorBaseUrl+options.originalMarkdownUrl+"  target=\"_blank\"><font size=\"4\">edit</font></a> <font size=\"4\">source.</font>";
+		content = content + "<p/><a href="+options.originalMarkdownUrl+"  target=\"_blank\"><font size=\"4\">Valiiew</font></a><font size=\"4\">/</font><a href="+editorBaseUrl+options.originalMarkdownUrl+"  target=\"_blank\"><font size=\"4\">edit</font></a> <font size=\"4\">source.</font>";
 
 		// prevent script end tags in the content from interfering
 		// with parsing
