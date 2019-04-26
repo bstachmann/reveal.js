@@ -112,8 +112,9 @@
 			content = notesMatch[0] + '<aside class="notes">' + marked(notesMatch[1].trim()) + '</aside>';
 		}
 
-        var editorBaseUrl = "https://gitlab.com/bjoern.stachmann/git-workshop/edit/advanced-git-en/";
-		content = content + "<p/><a href="+options.originalMarkdownUrl+"  target=\"_blank\"><font size=\"4\">Valiiew</font></a><font size=\"4\">/</font><a href="+editorBaseUrl+options.originalMarkdownUrl+"  target=\"_blank\"><font size=\"4\">edit</font></a> <font size=\"4\">source.</font>";
+        // https://github.com/bstachmann/git-workshop/edit/master/index.html
+        var editorBaseUrl = "https://github.com/bstachmann/git-workshop/edit/master/";
+		content = content + "<p/><a href="+options.originalMarkdownUrl+" target=\"_blank\"><font size=\"4\">View</font></a><font size=\"4\">/</font><a href="+editorBaseUrl+options.originalMarkdownUrl+"  target=\"_blank\"><font size=\"4\">edit</font></a> <font size=\"4\">source.</font>";
 
 		// prevent script end tags in the content from interfering
 		// with parsing
